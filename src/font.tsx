@@ -15,7 +15,7 @@ interface PixelTextProps {
 }
 
 export function PixelText(props: PixelTextProps): JSX.Element {
-  const { children, size = 2, color = "black" } = props;
+  const { children, size = 2, color = "#000000" } = props;
   const line = children[0].split("");
   const gap = 1;
   const height = Glyphs["A"].height;

@@ -10,8 +10,9 @@ const GameOverMenu = (props: {
   context: Devvit.Context;
   shieldsLeft: number;
   result: string;
+  device: string;
 }) => {
-  const { setCurrentScreen, context, shieldsLeft, result } = props;
+  const { setCurrentScreen, context, shieldsLeft, result, device } = props;
 
   const postCommentForm = useForm(
     {
@@ -46,26 +47,42 @@ const GameOverMenu = (props: {
   );
 
   return (
-    <vstack gap="medium">
+    <vstack gap="small">
       <zstack
         onPress={() => setCurrentScreen("leaderboard")}
-        backgroundColor="black"
-        padding="medium"
+        backgroundColor={device === "mobile" ? "white" : "black"}
+        padding="small"
         border="thick"
         borderColor="white"
         alignment="center middle"
       >
-        <PixelText color="white">Leaderboard</PixelText>
+        <PixelText color="white" size={2}>
+          Leaderboard
+        </PixelText>
+      </zstack>
+      <zstack
+        onPress={() => setCurrentScreen("level")}
+        backgroundColor={device === "mobile" ? "white" : "black"}
+        padding="small"
+        border="thick"
+        borderColor="white"
+        alignment="center middle"
+      >
+        <PixelText color="white" size={2}>
+          Levels
+        </PixelText>
       </zstack>
       <zstack
         onPress={() => context.ui.showForm(postCommentForm)}
-        backgroundColor="black"
-        padding="medium"
+        backgroundColor={device === "mobile" ? "white" : "black"}
+        padding="small"
         border="thick"
         borderColor="white"
         alignment="center middle"
       >
-        <PixelText color="white">Add Comment</PixelText>
+        <PixelText color="white" size={2}>
+          Add Comment
+        </PixelText>
       </zstack>
     </vstack>
   );

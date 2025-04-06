@@ -20,7 +20,7 @@ const Word = (props: {
     );
 
   return (
-    <hstack width="80%" alignment="center middle" gap="small">
+    <hstack width="100%" alignment="center middle" gap="small">
       {Array.from(guess).map((char, i) => (
         <vstack key={i.toString()}>
           <PixelText size={4}>{char}</PixelText>

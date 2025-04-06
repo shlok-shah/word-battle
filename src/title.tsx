@@ -6,24 +6,46 @@ Devvit.configure({
   redis: true,
 });
 
-const Title = (props: { shieldsLeft: number; guessedLetters: string }) => {
-  const { shieldsLeft, guessedLetters } = props;
+const Title = (props: {
+  shieldsLeft: number;
+  guessedLetters: string;
+  device: string;
+}) => {
+  const { shieldsLeft, guessedLetters, device } = props;
   return (
     <hstack width="100%" alignment="start" padding="medium">
-      <vstack width="35%" alignment="top" gap="small">
-        <PixelText color="black" size={2}>
+      <vstack width="30%" alignment="top" gap="small">
+        <PixelText color="white" size={2}>
           Guess the word
         </PixelText>
-        <PixelText color="black">{"Guessed-" + guessedLetters}</PixelText>
       </vstack>
-      <hstack width="35%" alignment="top center" gap="small">
-        {[...Array(shieldsLeft)].map((_, index) => (
-          <icon key={index.toString()} name="heart-fill" color="red" />
-        ))}
-      </hstack>
+
       <hstack width="30%" alignment="end" gap="small">
-        <button icon="help" />
-        <button icon="contest" />
+        <zstack
+          backgroundColor={device === "mobile" ? "white" : "black"}
+          padding="medium"
+          border="thick"
+          borderColor="white"
+          alignment="center middle"
+        >
+          <PixelText color="white" size={2}>
+            Info
+          </PixelText>
+        </zstack>
+        <zstack
+          backgroundColor="gray"
+          border="thin"
+          borderColor="white"
+          alignment="center middle"
+          padding="small"
+        >
+          <image
+            url="hint.png"
+            imageWidth="20px"
+            imageHeight="30px"
+            resizeMode="cover"
+          ></image>
+        </zstack>
       </hstack>
     </hstack>
   );

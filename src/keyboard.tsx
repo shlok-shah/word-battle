@@ -21,7 +21,8 @@ const Keyboard = (props: {
   setCurrentScreen: StateSetter<string>;
   _context: Devvit.Context;
   word: string;
-  isGameOver: (updatedLetters: string, updatedShieldsLeft: number) => boolean;
+  device: string;
+  isGameOver: (updatedLetters?: string, updatedShieldsLeft?: number) => boolean;
 }) => {
   const {
     guessedLetters,
@@ -31,10 +32,11 @@ const Keyboard = (props: {
     _context,
     word,
     isGameOver,
+    device,
   } = props;
   const { redis } = _context;
 
-  const keyPressed = (alphabet: string) => {
+  const keyPressed = async (alphabet: string) => {
     const oldGuessedLetters = guessedLetters;
     if (guessedLetters.includes(alphabet)) {
       return console.log("already been selected");
@@ -49,16 +51,16 @@ const Keyboard = (props: {
         );
       setShieldsLeft(Math.max(0, totalShields - wrongGuesses));
       const updatedShieldsLeft = Math.max(0, totalShields - wrongGuesses);
+      isGameOver(updatedLetters, updatedShieldsLeft);
       redis.set(
         getGuessedLetters(_context.postId, _context.userId),
         updatedLetters
       );
-      isGameOver(updatedLetters, updatedShieldsLeft);
     }
   };
 
   return (
-    <vstack height="50%" width="70%">
+    <vstack>
       {alphabets.map((alphabetRow, index) => {
         return (
           <hstack width="100%" alignment="center">
@@ -66,12 +68,18 @@ const Keyboard = (props: {
               return (
                 <zstack
                   key={alphabet}
-                  height="35px"
-                  width="35px"
-                  backgroundColor="black"
+                  height={device === "laptop" ? "35px" : "30px"}
+                  width={device === "laptop" ? "35px" : "30px"}
+                  backgroundColor={
+                    guessedLetters.includes(alphabet)
+                      ? "#FFFFFF0F"
+                      : device === "mobile"
+                      ? "white"
+                      : "black"
+                  }
                   alignment="center middle"
                   border="thin"
-                  borderColor="white"
+                  borderColor={device === "mobile" ? "black" : "white"}
                   onPress={(event) => {
                     keyPressed(alphabet);
                   }}
