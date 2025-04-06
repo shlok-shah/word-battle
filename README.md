@@ -20,3 +20,10 @@ I used Devvit Blocks as my UI framework and utilized Redis as my database.
 - Introducing achievements and badges for milestones.
 - Expanding the leaderboard with more ranking features.
 - Adding more retro arcade themes
+
+## Try it out 
+- https://www.reddit.com/r/Word_Battle/
+- https://developers.reddit.com/apps/word-battle
+
+## Video Demo
+https://www.youtube.com/watch?v=I1FMwCpSQP0
